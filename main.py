@@ -1,35 +1,16 @@
 
 
-from tempfile import TemporaryDirectory
+def illeagal_line(line):
+    open = ["(", "[", "{", "<"]
+    close = [")", "]", "}", ">"]
 
-
-f = open("input.txt", "r")
-
-#print(f.readlines())
-string = f.readlines()
-#print(f.readline())
-
-open = ["(", "[", "{", "<"]
-close = [")", "]", "}", ">"]
-
-dict = {
-    ")" : "(",
-    "]" : "[",
-    "}" : "{",
-    ">" : "<"
-}
-
-illeagal_characters = {
-    ")" : 3,
-    "]" : 57,
-    "}" : 1197,
-    ">" : 25137
-}
-
-total = 0
-
-for lines in string:
-    print(lines)
+    dict = {
+        ")" : "(",
+        "]" : "[",
+        "}" : "{",
+        ">" : "<"
+    }
+    
     temp_list = []
     for element in lines:
         if element in open:
@@ -38,9 +19,18 @@ for lines in string:
             if dict[element] == temp_list[len(temp_list)-1]:
                 temp_list.pop()
             else: 
-                print("ILLEGAL CHARACTER")
-                print(element)
-                total = total + illeagal_characters[element]
-                break
+                return True
 
-print(total)
+
+f = open("input.txt", "r")
+
+string = f.readlines()
+
+incomplete = []
+for lines in string:
+    if illeagal_line(lines):
+        continue
+    else:
+        incomplete.append(lines)
+
+print (incomplete)
