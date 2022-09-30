@@ -19,17 +19,28 @@ dict = {
     ">" : "<"
 }
 
-temp_list = []
+illeagal_characters = {
+    ")" : 3,
+    "]" : 57,
+    "}" : 1197,
+    ">" : 25137
+}
 
-print(string[1])
-for element in string[1]:
-    if element in open:
-        temp_list.append(element)
-    elif element in close:
-        if dict[element] == temp_list[len(temp_list)-1]:
-            temp_list.pop()
-        else: 
-            print("ILLEGAL CHARACTER")
-            print(element)
-            break
-        
+total = 0
+
+for lines in string:
+    print(lines)
+    temp_list = []
+    for element in lines:
+        if element in open:
+            temp_list.append(element)
+        elif element in close:
+            if dict[element] == temp_list[len(temp_list)-1]:
+                temp_list.pop()
+            else: 
+                print("ILLEGAL CHARACTER")
+                print(element)
+                total = total + illeagal_characters[element]
+                break
+
+print(total)
