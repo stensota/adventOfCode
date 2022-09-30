@@ -12,13 +12,24 @@ string = f.readlines()
 open = ["(", "[", "{", "<"]
 close = [")", "]", "}", ">"]
 
+dict = {
+    ")" : "(",
+    "]" : "[",
+    "}" : "{",
+    ">" : "<"
+}
+
 temp_list = []
 
 print(string[1])
-
 for element in string[1]:
-    print(element)
     if element in open:
         temp_list.append(element)
-
-print(temp_list)
+    elif element in close:
+        if dict[element] == temp_list[len(temp_list)-1]:
+            temp_list.pop()
+        else: 
+            print("ILLEGAL CHARACTER")
+            print(element)
+            break
+        
